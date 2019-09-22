@@ -1,0 +1,58 @@
+/* Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k. */
+
+/* O(n2) */
+
+var subarraySum = function(nums) {
+  const target = 0;
+    /* cummulative sum */
+    
+  const cummSum = new Array(nums.length+1);  //space comp: O(n)
+  // cummSum[i] = cummulative sum from index 0 to (i-1)th index of nums
+  cummSum[0] = 0;
+  const nLen = nums.length; 
+  
+  // O(n) --> extracted out
+  for (let i = 1; i < nLen; i++) {
+    cummSum[i] = cummSum[i-1] + nums[i-1];
+  }
+  
+  let count = 0;
+  
+  // start counting --> O(n2)
+  for (let start = 0; start < nLen; start++) {
+    for (let end = start + 1; end < nLen; end++) {
+      if (cummSum[end] - cummSum[start] === target)
+        count++;
+    }
+  }
+  
+  return count;  
+};
+
+
+/* O(n) - use hashmap - idea: hashmap contains cummulative sums from index 0 to whatever. At index i, if hashmap has (sum- k) as a key, then we can count ++  */
+
+const subarraySum = function(nums) {
+  const target = 0;
+  let count = 0, sum = 0
+  const map = new Map()
+  map.set(0,1);
+  
+  nums.forEach( (val, idx) => {
+    sum += nums[idx]
+    if (map.has(sum - target)) {
+      count += map.get(sum-target)
+    }
+    let value = (map.has(sum))? map.get(sum) : 0
+    map.set(sum, value+1)
+  });
+  
+  return count;
+  
+};
+
+// /* test cases*/
+
+console.log(subarraySum([1,1,1]))
+console.log(subarraySum([4,2,-3,1,6]))
+console.log(subarraySum([4,2,0,1,6]))
