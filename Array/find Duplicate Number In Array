@@ -1,0 +1,28 @@
+/* Q: You're given an unsorted array of integers, where every integer ap
+Write a function that finds the integer that appears only once.
+Eg:- Array = 5,2,3,1,1,2,3 . Answer = 5 */
+
+
+var findSolo = function(array) {
+//account for empty array + arrays with non-integers
+  if (!array.length) return "nothing";
+  array.sort((a,b) => a-b) // ascending order O(nlogn)
+  
+  for (let i = 0; i < array.length; i=i+2){
+    if (typeof(array[i]) !== 'number'){
+      i--;
+      continue;
+    } else{
+      if (array[i] !== array[i+1]){
+      return array[i];
+      }
+    }
+  }
+};
+
+console.log(findSolo([]));
+console.log(findSolo([1]));
+console.log(findSolo([1,2,1]));
+console.log(findSolo(["cat",2,1,1])); //accounting for non-numbers.
+console.log(findSolo(["dog","cat",2,1,1])); 
+console.log(findSolo(["dog",2,"cat", 1,1])); 
