@@ -32,10 +32,8 @@ class Solution {
         for (int i = 0; i < k; i++) {
             ans.add(queue.poll().word);
         }
-        
+
         return ans;
-        
-        
     }
     
     class Node {
@@ -50,3 +48,32 @@ class Solution {
 }
 
 
+/* Approach 2 - Without having to make Node structure */
+
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        
+        Map<String, Integer> count = new HashMap();
+        for (String word: words){
+            // count.putIfAbsent(word, 0);
+            count.put(word, count.getOrDefault(word, 0) + 1);
+        }
+        // maxHeap
+        PriorityQueue<String> maxHeap = new PriorityQueue<String>(k, (a,b) -> count.get(a).equals(count.get(b)) ?
+                a.compareTo(b) : count.get(b) - count.get(a)       
+        );
+        
+        for (String word: count.keySet()){
+            maxHeap.offer(word);
+        }
+        
+        List<String> ans = new ArrayList<>();
+        
+        for (int i = 0; i<k ; i++){
+            ans.add(maxHeap.poll());
+        }
+        
+        return ans;
+    }
+    
+}
