@@ -19,6 +19,7 @@ Output:
 3
 */
 
+/* Union method */ 
 public class Solution {
     /**
      * @param grid: a boolean 2D matrix
@@ -93,5 +94,49 @@ public class Solution {
         
         return target;
     }
+   
+}
+
+/* DFS */
+public class Solution {
+    /**
+     * @param grid: a boolean 2D matrix
+     * @return: an integer
+     */
+    private int rows;
+    private int cols;
+    
+    public int numIslands(boolean[][] grid) {
+         if (grid == null || grid.length == 0 || grid[0].length == 0){
+             return 0;
+         }
+         
+         rows = grid.length;
+         cols = grid[0].length;
+         
+         int numberOfIslands  = 0;
+         for (int i = 0; i < rows; i++){
+            for (int j = 0; j < cols; j++){
+                 if (!grid[i][j]) continue;
+                 numberOfIslands++;
+                 DFS(grid, i, j);
+            }
+        }
+        return numberOfIslands;
+    }
+    
+    public void DFS(boolean[][]grid, int i, int j){
+        if (i < 0 || i >= rows || j < 0 || j >= cols) {
+            return;
+        }
+        if (grid[i][j]){
+            grid[i][j] = false;
+            DFS(grid, i-1, j);
+            DFS(grid, i+1, j);
+            DFS(grid, i, j-1);
+            DFS(grid, i, j+1);
+        }
+    }
+    
    
 }
