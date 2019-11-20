@@ -46,3 +46,42 @@ public int longestValidParentheses(String s) {
         
         return maxLen;
     }
+
+
+/* iterating through the string front and back 
+ *  Time  complexity : O(n). Two traversals of the string.
+ *  Space complexity : O(1). Only two extra variables left and right are needed.
+ */
+public int longestValidParentheses(String s) {
+       int left = 0, right = 0, maxlen = 0;
+       
+       for (int i = 0; i < s.length(); i++){
+           if (s.charAt(i) == '('){
+               left++;
+           } else{
+               right++;
+           }
+           if (left == right){
+               maxlen = Math.max(maxlen, 2 *right);
+           } else if (right > left){
+               right = left = 0;
+           }
+       }
+       
+       right = left = 0;
+       
+       for (int j = s.length()-1; j >=0; j--){
+            if (s.charAt(j) == '('){
+               left++;
+           } else{
+               right++;
+           }
+           if (left == right){
+               maxlen = Math.max(maxlen, 2 *left);
+           } else if (left > right){
+               right = left = 0;
+           }
+       }
+       
+       return maxlen;
+    }
