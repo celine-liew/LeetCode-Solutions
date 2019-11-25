@@ -1,6 +1,5 @@
-/**
- 
 /* 8 Level order traversal of a tree is breadth first traversal for the tree.
+
  * Definition of TreeNode:
  * public class TreeNode {
  *     public int val;
@@ -46,7 +45,9 @@ public class Solution {
         return result;
     }
     
-    /* BFS */
+    /* BFS  O(n) time as they visit every node exactly once. 
+    Extra Space required for Level Order Traversal is O(w) where w is maximum width of Binary Tree. 
+    In level order traversal, queue one by one stores nodes of different level.*/
    public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
