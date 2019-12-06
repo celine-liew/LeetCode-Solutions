@@ -47,3 +47,8 @@ function largestSubarray(arr, k){
 
 let arr = [ 1, 9, 2, 7, 9, 3] , k = 2;
 console.log(largestSubarray(arr, k));
+/*  Before: [ [ 1, 9, 2 ], [ 9, 2, 7 ], [ 2, 7, 9 ], [ 7, 9, 3 ] ]
+After: [ [ 1, 9, 2 ], [ 2, 7, 9 ], [ 7, 9, 3 ], [ 9, 2, 7 ] ]
+Ans: [ 9, 2, 7 ]
+*/
+
