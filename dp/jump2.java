@@ -13,9 +13,11 @@ Output: 2
 Explanation: The minimum number of jumps to reach the last index is 2.
     Jump 1 step from index 0 to 1, then 3 steps to the last index.
     */
+import java.util.Arrays; 
+
 
 class Solution {
-    public int jump(int[] nums) {
+    static int jump(int[] nums) {
         
         
         /* O(n^2) , TLE */
@@ -59,4 +61,11 @@ class Solution {
         
         return i - 1;
     }
+    
+    /* to test this */
+    public static void main (String[] args)  {
+        int[] nums = { 2,3,1,1,4 };
+        int ans = jump(nums);
+        System.out.println(ans);
+  }
 }
